@@ -2,7 +2,7 @@
 /**
  * Plugin Name: WP Easter Egg
  * Description: Add an Easter Egg to your site
- * Version:     0.1.0
+ * Version:     0.2.0
  * Author:      mmcachran
  * License:     GPLv2+
  * Text Domain: wp_easter_egg
@@ -95,6 +95,7 @@ class WP_Easter_Egg {
 			'custom_code' => self::fetch_option( 'custom_code' ),
 			'action' => self::fetch_option( 'action' ),
 			'custom_js' => self::fetch_option( 'custom_js' ),
+			'image' => self::fetch_option( 'image' ),
 		);
 		
 		return $js_data;

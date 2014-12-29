@@ -16,6 +16,7 @@ class WP_Easter_Egg_Options {
 		
 		// only add the js on the WPEE admin page
 		if( is_admin() && isset( $_GET['page'] ) && $_GET['page'] === 'wp_easter_egg_plugin' ) {
+			wp_enqueue_media();
 			wp_enqueue_script( 'wp-easter-egg-admin', plugins_url( '/wp-easter-egg-admin.js', __FILE__ ), array( 'jquery' ) );
 		}
 		
@@ -57,6 +58,14 @@ class WP_Easter_Egg_Options {
 			'WP_Easter_Egg_settingsPage', 
 			'wp_easter_egg_settingsPage_section' 
 		);
+		
+		add_settings_field( 
+			'wp_easter_egg_image_render', 
+			__( 'Custom JS', 'wp_easter_egg' ), 
+			array( $this, 'wp_easter_egg_image_render' ), 
+			'WP_Easter_Egg_settingsPage', 
+			'wp_easter_egg_settingsPage_section' 
+		);
 	}
 	
 	
@@ -81,6 +90,7 @@ class WP_Easter_Egg_Options {
 		<select name='wp_easter_egg_settings[action]'>
 			<option value='rotate_screen' <?php selected( WP_Easter_Egg::fetch_option( 'action' ), 'rotate_screen' ); ?>>Rotate Screen</option>
 			<option value='cornify' <?php selected( WP_Easter_Egg::fetch_option( 'action' ), 'cornify' ); ?>>Cornify</option>
+			<option value='move_image_across_bottom' <?php selected( WP_Easter_Egg::fetch_option( 'action' ), 'move_image_across_bottom' ); ?>>Move Image Across Bottom of Screen</option>
 			<option value='custom_js' <?php selected( WP_Easter_Egg::fetch_option( 'action' ), 'custom_js' ); ?>>Custom JS</option>
 		</select>
 		<?php
@@ -91,8 +101,17 @@ class WP_Easter_Egg_Options {
 		<textarea cols='40' rows='5' name='wp_easter_egg_settings[custom_js]'><?php echo WP_Easter_Egg::fetch_option( 'custom_js' ); ?></textarea>
 	 	<p><label for="wp_easter_egg_settings[custom_js]">WARNING: this could be dangerous to your site</label></p>
 		<?php
-	
 	}
+	
+	public function wp_easter_egg_image_render() { 
+		?>
+		<div class="uploader">
+			<input id="_wp_easter_egg_image" name="wp_easter_egg_settings[image]" type="text" value="<?php echo WP_Easter_Egg::fetch_option( 'image' ); ?>" />
+			<input id="_wp_easter_egg_image_button" class="button" name="_wp_easter_egg_image_button" type="button" value="Upload" />
+			<p><img id="image_preview" src="" style="display: none; max-height: 250px; max-width: 250px;" /></p>
+		</div>
+		<?php
+	}	
 
 	public function wp_easter_egg_settings_section_callback() {
 		echo __( '', 'wp_easter_egg' );
