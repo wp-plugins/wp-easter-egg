@@ -9,7 +9,7 @@ Easily add Easter Eggs to your WordPress site using the Konami code or a custom 
 
 == Description ==
 
-Currently includes options for Cornify JS, Raptorize JS, rotating the user's screen, moving an image across the user's screen, and firing user defined JS.
+Currently includes options for Cornify (cornify.com), Raptorize (zurb.com/playground/jquery-raptorize), rotating the user's screen, moving an image across the user's screen, and firing user defined JS.
 
 == Installation ==
 
